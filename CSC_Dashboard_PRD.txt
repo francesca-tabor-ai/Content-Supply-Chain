@@ -1,0 +1,439 @@
+================================================================================
+PRODUCT REQUIREMENTS DOCUMENT
+Content Supply Chain Dashboard
+Version 1.0 | Draft | March 2026
+================================================================================
+
+Product Owner:   Shami / CSC Programme
+Status:          Draft
+Last Updated:    March 2026
+Target Launch:   Q3 2025
+Platform:        Web (Brand Central)
+Tech Stack:      Workfront · Brand Central · StudioOne
+
+
+--------------------------------------------------------------------------------
+1. OVERVIEW
+--------------------------------------------------------------------------------
+
+The CSC Dashboard consolidates fragmented toolbox planning, asset management,
+transcreation workflows, and market approvals into a single pane of glass —
+eliminating manual file transfers, broken handoffs, and opaque status tracking
+across the content supply chain.
+
+The Content Supply Chain currently operates across 4+ disconnected systems with
+manual handoffs at every stage. A unified dashboard that mirrors the end-to-end
+workflow — from toolbox planning through transcreation to market activation —
+will reduce cycle time, eliminate file-transfer errors, and give every
+stakeholder the situational awareness they need to act without waiting.
+
+
+--------------------------------------------------------------------------------
+2. PROBLEM STATEMENT
+--------------------------------------------------------------------------------
+
+The following pain points were identified by analysing the As-Is processes
+across all stakeholder roles.
+
+[CRITICAL] Invisible Pipeline
+  No stakeholder has a real-time view of where a toolbox is in the end-to-end
+  journey — from agency briefing through master asset creation, transcreation,
+  and market go-live.
+
+[CRITICAL] Manual Asset Logistics
+  Content Delivery & Transcreation Teams manually download, rename, transfer,
+  and re-upload files. This introduces errors, delays, and version drift at
+  every handoff.
+
+[HIGH] Siloed Tooling
+  Brand Portal, Workfront, StudioOne, and Brand Central are disconnected. Users
+  context-switch between 4+ tools, duplicating effort and losing traceability.
+
+[HIGH] Market Exclusion
+  Market Users cannot self-serve assets or track CDT localisation progress.
+  They raise PowerPoint briefs and wait, with no ETA visibility.
+
+[MEDIUM] Risk Blindness
+  Programme managers lack a consolidated view of at-risk milestones across
+  simultaneous toolbox programmes (e.g. Veev One, TEREA Remaster running
+  in parallel).
+
+
+--------------------------------------------------------------------------------
+3. USERS & PERSONAS
+--------------------------------------------------------------------------------
+
+TOOLBOX OWNER
+  Responsible for: Planning scope, audience, and budget. Coordinating creative,
+  production, and channel agencies.
+
+  As-Is Pain Points:
+    - No single source of truth for programme status
+    - Manual playbook creation and publishing
+
+  To-Be Experience:
+    - Creates projects via Brand Central using the global playbook template
+    - Manages plans and risks in Workfront
+    - Publishes digital playbook to Brand Central
+
+
+CREATIVE AGENCY
+  Responsible for: Creating toolbox content — concepts, master visuals, and
+  channel-ready assets.
+
+  As-Is Pain Points:
+    - Brief received via PowerPoint, no structured format
+    - Approval loops are email-based
+
+  To-Be Experience:
+    - Receives structured brief in Workfront
+    - Submits concepts for inline approval
+    - Uploads approved master assets directly to Brand Central
+
+
+PRODUCTION TEAM
+  Responsible for: Managing Production Agency. Overseeing asset adaptation
+  and quality.
+
+  As-Is Pain Points:
+    - Task management fragmented across Workfront and email
+    - Version control issues on master files
+
+  To-Be Experience:
+    - Full task visibility in Workfront
+    - Asset versioning tracked in Brand Central
+
+
+CONTENT DELIVERY & TRANSCREATION TEAM
+  Responsible for: Adapting toolbox content for local markets; ensuring brand
+  and legal compliance.
+
+  As-Is Pain Points:
+    - Manually downloads, transfers, and uploads files
+    - Struggles to find and manage source assets
+
+  To-Be Experience:
+    - Receives requests via Workfront with attached files
+    - Works in shared environment (no download needed)
+    - Marks tasks complete and triggers market review automatically
+
+
+CHANNEL AGENCY
+  Responsible for: Creating channel assets referencing master files. Updating
+  digital playbook.
+
+  As-Is Pain Points:
+    - No direct access to master assets until email confirmation
+    - Playbook updates are manual
+
+  To-Be Experience:
+    - Self-serve asset access in Brand Central
+    - Playbook updates automated on asset approval
+
+
+MARKET USER
+  Responsible for: Planning local campaigns, requesting CDT changes, and
+  approving localised content.
+
+  As-Is Pain Points:
+    - Manually searches for completed files
+    - No visibility on CDT localisation progress
+
+  To-Be Experience:
+    - Browse and build shopping basket requests in Brand Central
+    - Review and approve CDT localised content
+    - Access completed files directly from Brand Central library
+
+
+--------------------------------------------------------------------------------
+4. GOALS & METRICS
+--------------------------------------------------------------------------------
+
+Category      Goal                                          Metric                            Baseline        Target
+----------    --------------------------------------------  --------------------------------  --------------  --------
+Visibility    100% of active programmes visible in         Programme visibility rate          ~0%             100%
+              real-time on a unified dashboard
+
+Efficiency    Eliminate manual file transfer steps         Manual file operations per brief   3-5 per brief   0
+              for CDT team
+
+Speed         Reduce market asset access time after        Hours from CDT approval to         24-72 hours     < 1 hour
+              CDT completion                               asset available in Brand Central
+
+Adoption      All briefs raised via Brand Central          % briefs raised in-platform        ~10%            95%
+              (not PowerPoint/email)
+
+Risk          At-risk milestones flagged proactively       % at-risk tasks flagged            Reactive only   90%
+              before they slip                             >= 3 days before deadline
+
+Quality       Reduce localisation compliance failures      CDT rework rate per market         ~18%            < 5%
+
+
+--------------------------------------------------------------------------------
+5. FEATURES
+--------------------------------------------------------------------------------
+
+F1 | PROGRAMME COMMAND CENTRE [P0]
+  The top-level view of all active toolbox programmes. Gantt + card view showing
+  milestones, owners, and RAG status.
+
+  User Stories:
+    01. As a Toolbox Owner, I can see all active programmes in a single dashboard
+        with current phase and health status.
+    02. As a Programme Manager, I can filter by toolbox, phase, owner, and
+        at-risk flag.
+    03. As any stakeholder, I can drill into a programme to see the full task
+        timeline.
+    04. Milestones from the CSC Plan CSV auto-sync into the dashboard view.
+
+
+F2 | DIGITISED PLAYBOOK BUILDER [P0]
+  Structured digital playbook creation from a global template, replacing manual
+  PowerPoint/Brand Portal process.
+
+  User Stories:
+    01. As a Toolbox Owner, I can create a new playbook project using the global
+        Brand Central template.
+    02. Playbook auto-populates with approved master assets upon milestone
+        completion.
+    03. Publish to Brand Central with one click — no manual upload or version
+        management.
+    04. Version history and diff view for all playbook iterations.
+
+
+F3 | ASSET HUB & SHOPPING BASKET [P0]
+  Centralised asset browsing, filtering, and request mechanism for Market Users
+  and Channel Agencies.
+
+  User Stories:
+    01. As a Market User, I can browse and filter assets by market, channel,
+        format, and language.
+    02. As a Market User, I can build a shopping basket of assets and submit a
+        CDT request in-platform.
+    03. Asset availability is gated by approval status — no pre-approval assets
+        visible to markets.
+    04. Search filters include: asset type, toolbox, market, date range,
+        approval status.
+
+
+F4 | TRANSCREATION BRIEF & WORKFLOW [P0]
+  End-to-end transcreation request flow — brief creation, file attachment, CDT
+  work, market review, and approval — without leaving the platform.
+
+  User Stories:
+    01. Brief auto-generated with source files attached when Market User submits
+        basket request.
+    02. CDT receives brief in Workfront with all files pre-linked (no manual
+        download).
+    03. CDT marks task complete → auto-notifies Market User for review.
+    04. Market User approves/rejects with inline annotation; rejection triggers
+        CDT rework task.
+    05. Completed localised assets auto-land in Market User's Brand Central
+        library.
+
+
+F5 | RISK & MILESTONE TRACKER [P1]
+  Proactive risk surfacing across all concurrent programmes, derived from
+  CSC Plan milestone data.
+
+  User Stories:
+    01. At-risk tasks flagged automatically when completion probability drops
+        based on predecessor delays.
+    02. Weekly risk digest email sent to programme owners.
+    03. RAG (Red/Amber/Green) status visible on all programme cards.
+    04. Milestone dependency visualisation (predecessor relationships from
+        CSV plan).
+
+
+F6 | ANALYTICS & REPORTING [P1]
+  Data point tracking for Brand Central usage, CDT throughput, and market
+  adoption metrics.
+
+  User Stories:
+    01. Dashboard with programme velocity, brief volume, and CDT cycle time.
+    02. Market-level adoption reporting: % of assets accessed vs. available.
+    03. Export reports as CSV or PDF for stakeholder presentations.
+    04. Brand Central Data Point Tracking feeds automatically into analytics
+        layer.
+
+
+F7 | NOTIFICATION & INTEGRATION LAYER [P2]
+  Bidirectional sync with Workfront and Brand Central; in-app and email
+  notifications for key events.
+
+  User Stories:
+    01. Workfront task status changes reflected in dashboard within 5 minutes.
+    02. Users notified when their tasks are unblocked or approaching SLA.
+    03. Integration with StudioOne for creative agency brief handoff.
+    04. Audit log of all status changes, approvals, and file uploads.
+
+
+--------------------------------------------------------------------------------
+6. USER FLOWS
+--------------------------------------------------------------------------------
+
+TOOLBOX OWNER — NEW PROGRAMME LAUNCH
+  1. Create project in Brand Central using global playbook template
+  2. Define scope, budget, market targets, and key milestones
+  3. Build shopping basket with custom elements (channels, formats, markets)
+  4. Assign tasks to Creative Agency via Workfront integration
+  5. Monitor programme health on Command Centre dashboard
+  6. Publish approved playbook to Brand Central
+
+
+MARKET USER — REQUEST LOCALISED ASSET
+  1. Browse Asset Hub — filter by market, channel, format
+  2. Add required assets to shopping basket
+  3. Submit CDT request with localisation brief (in-platform, no PowerPoint)
+  4. Track CDT progress via brief status tracker
+  5. Receive notification when localised assets are ready for review
+  6. Approve or reject with annotation → assets land in library on approval
+
+
+CDT TEAM — TRANSCREATION WORKFLOW
+  1. Receive brief notification in Workfront (files pre-attached)
+  2. Open shared asset environment — no download needed
+  3. Complete transcreation work in-environment
+  4. Run brand & legal compliance checklist
+  5. Mark task complete → market user notified automatically
+  6. Handle any market rejection → rework task auto-created
+
+
+--------------------------------------------------------------------------------
+7. DATA MODEL
+--------------------------------------------------------------------------------
+
+Programme
+  - id
+  - name
+  - startDate
+  - endDate
+  - phase
+  - ragStatus
+  - owner
+  - toolboxType
+
+Milestone
+  - id
+  - programmeId
+  - name
+  - dueDate
+  - predecessors[]
+  - completedDate
+  - atRisk
+
+Asset
+  - id
+  - programmeId
+  - name
+  - type
+  - format
+  - market
+  - language
+  - approvalStatus
+  - version
+
+Brief
+  - id
+  - marketUserId
+  - assets[]
+  - market
+  - language
+  - cdt.ownerId
+  - status
+  - submittedAt
+
+PlaybookVersion
+  - id
+  - programmeId
+  - version
+  - publishedAt
+  - sections[]
+  - assetRefs[]
+
+User
+  - id
+  - name
+  - role
+  - market
+  - organisation
+  - workfrontId
+
+
+--------------------------------------------------------------------------------
+8. NON-GOALS (OUT OF SCOPE FOR V1)
+--------------------------------------------------------------------------------
+
+  - Not a creative production tool: The dashboard orchestrates workflow but does
+    not replace creative software (Photoshop, InDesign, After Effects).
+
+  - Not a media buying platform: Campaign activation and paid media scheduling
+    are out of scope.
+
+  - Not a global DAM replacement: Brand Central remains the system of record for
+    assets; this dashboard surfaces and routes assets, not stores them.
+
+  - No v1 mobile app: Initial release is desktop web only. Mobile is Phase 2.
+
+  - No real-time co-editing: Collaborative real-time document editing
+    (Google Docs-style) is not in scope for v1.
+
+
+--------------------------------------------------------------------------------
+9. TIMELINE
+--------------------------------------------------------------------------------
+
+PHASE 0 — FOUNDATION (May–Jun 2025)                              [IN PROGRESS]
+  - Brand Central UX & Misc
+  - Show and Tell sessions
+  - Workfront integration scoping
+  - StudioOne connector design
+
+PHASE 1 — CORE BUILD (Jun–Sep 2025)                              [PLANNED]
+  - Digitised Playbook (Brand Central)
+  - Transcreation Brief in Brand Central
+  - Search Filters implementation
+  - Brand Central Data Point Tracking
+
+PHASE 2 — UAT & GO LIVE (Jul–Sep 2025)                          [PLANNED]
+  - Test Plan creation & approval
+  - UAT → Feedback Loop
+  - Go Live (Brand Central)
+  - Veev One Flavour Expansion Toolbox pilot
+
+PHASE 3 — SCALE (Oct–Nov 2025)                                   [FUTURE]
+  - Channel Asset workflows live
+  - Analytics & Reporting layer
+  - Risk tracker automation
+  - Multi-programme rollout (TEREA, Iluma I)
+
+
+--------------------------------------------------------------------------------
+10. OPEN QUESTIONS
+--------------------------------------------------------------------------------
+
+01. [BLOCKER] Who owns the Brand Central integration with Workfront — product
+    team or agencies?
+
+02. [HIGH] What is the SLA commitment for CDT turnaround that the tracker
+    should baseline against?
+
+03. [HIGH] Should Market Users have visibility of asset status before CDT
+    completion, or only post-approval?
+
+04. [MEDIUM] How are compliance/legal review steps modelled — separate
+    Workfront task or inline approval gate?
+
+05. [MEDIUM] What data points need to be tracked for Brand Central analytics
+    and who consumes them?
+
+06. [MEDIUM] Is there a change management plan for migrating markets off the
+    PowerPoint brief process?
+
+07. [LOW] Will the shopping basket request support bulk requests across multiple
+    markets simultaneously?
+
+
+================================================================================
+END OF DOCUMENT
+================================================================================
