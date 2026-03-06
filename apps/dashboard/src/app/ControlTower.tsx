@@ -1,16 +1,13 @@
 import { Link } from 'react-router-dom'
 import { FlowMap } from '../components/FlowMap'
 
-const sections = [
-  { to: '/demand', title: 'Demand Signal', desc: 'Content the organization needs' },
-  { to: '/supply', title: 'Supply Capacity', desc: 'Production capacity & workload' },
-  { to: '/flow', title: 'Flow Pipeline', desc: 'Pipeline health & bottlenecks' },
-  { to: '/localization', title: 'Localization Intelligence', desc: 'Global rollout readiness' },
-  { to: '/reuse', title: 'Reuse & Modular Content', desc: 'Asset reuse & adaptation' },
-  { to: '/performance', title: 'Performance & ROI', desc: 'Content ROI & engagement' },
-  { to: '/governance', title: 'Governance', desc: 'Compliance & brand' },
-  { to: '/automation', title: 'AI & Automation', desc: 'Automation adoption & savings' },
-  { to: '/system-health', title: 'System Health', desc: 'Metadata, DAM, CMS sync' },
+const overviewSections = [
+  { to: '/content-production/pipeline', title: 'Supply chain health', desc: 'Overall pipeline status and capacity' },
+  { to: '/content-production/pipeline', title: 'Pipeline overview', desc: 'Stage-by-stage flow and throughput' },
+  { to: '/insights/supply-chain-intelligence', title: 'Bottlenecks', desc: 'Bottleneck detection and impact' },
+  { to: '/distribution/campaign-launch', title: 'Campaign readiness', desc: 'Active campaigns and launch schedules' },
+  { to: '/localization/market-readiness', title: 'Market readiness', desc: 'Market rollout status and timelines' },
+  { to: '/measurement/content-performance', title: 'Performance snapshot', desc: 'Content effectiveness and ROI' },
 ]
 
 export function ControlTower() {
@@ -18,14 +15,14 @@ export function ControlTower() {
     <div>
       <header className="page-header">
         <div className="accent-bar" aria-hidden />
-        <h1 className="h1">Content Supply Chain Control Tower</h1>
+        <h1 className="h1">Home</h1>
         <p className="subtitle">
-          Four operational layers: Demand → Supply → Flow → Impact. Real-time visibility across the content pipeline.
+          Executive overview of the entire content supply chain.
         </p>
       </header>
 
       <section className="card flow-map-card">
-        <h2 className="card-title">Content Supply Chain Flow Map</h2>
+        <h2 className="card-title">Pipeline overview</h2>
         <p className="card-desc" style={{ marginBottom: 'var(--space-6)' }}>
           Live pipeline visualization. Red nodes indicate bottlenecks.
         </p>
@@ -33,8 +30,8 @@ export function ControlTower() {
       </section>
 
       <div className="control-tower-grid">
-        {sections.map(({ to, title, desc }) => (
-          <Link key={to} to={to} className="tower-card">
+        {overviewSections.map(({ to, title, desc }) => (
+          <Link key={title} to={to} className="tower-card">
             <h3 className="tower-card-title">{title}</h3>
             <p className="tower-card-desc">{desc}</p>
           </Link>
@@ -42,7 +39,7 @@ export function ControlTower() {
       </div>
 
       <section className="card" style={{ marginTop: 'var(--space-8)' }}>
-        <h2 className="card-title">Predictive Delivery Risk</h2>
+        <h2 className="card-title">Predictive delivery risk</h2>
         <p className="card-desc" style={{ marginBottom: 'var(--space-4)' }}>
           At-risk campaigns before they slip.
         </p>

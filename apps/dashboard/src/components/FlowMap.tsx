@@ -17,9 +17,9 @@ export function FlowMap() {
         {stages.map((stage, i) => (
           <div key={stage.id} className="flow-map-cell">
             <Link
-              to="/flow"
+              to="/content-production/pipeline"
               className={`flow-map-node ${stage.bottleneck ? 'bottleneck' : ''}`}
-              title={stage.bottleneck ? 'Bottleneck — see Flow Pipeline' : ''}
+              title={stage.bottleneck ? 'Bottleneck — see Content Pipeline' : ''}
             >
               <span className="flow-map-label">{stage.label}</span>
               <span className="flow-map-count">{stage.count}</span>
