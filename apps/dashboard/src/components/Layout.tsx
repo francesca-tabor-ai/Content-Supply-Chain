@@ -1,10 +1,16 @@
 import { Link, NavLink, Outlet } from 'react-router-dom'
 
 const navItems = [
-  { to: '/', label: 'Command Centre' },
-  { to: '/assets', label: 'Asset Hub' },
-  { to: '/playbook', label: 'Playbook' },
-  { to: '/briefs', label: 'Briefs' },
+  { to: '/', label: 'Control Tower' },
+  { to: '/demand', label: 'Demand Signal' },
+  { to: '/supply', label: 'Supply Capacity' },
+  { to: '/flow', label: 'Flow Pipeline' },
+  { to: '/localization', label: 'Localization' },
+  { to: '/reuse', label: 'Reuse & Modular' },
+  { to: '/performance', label: 'Performance & ROI' },
+  { to: '/governance', label: 'Governance' },
+  { to: '/automation', label: 'AI & Automation' },
+  { to: '/system-health', label: 'System Health' },
 ]
 
 export function Layout() {
@@ -12,7 +18,7 @@ export function Layout() {
     <div className="layout">
       <aside className="sidebar">
         <Link to="/" className="sidebar-brand">
-          CSC Dashboard
+          CSC Control Tower
         </Link>
         <nav className="sidebar-nav">
           {navItems.map(({ to, label }) => (
