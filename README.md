@@ -98,7 +98,9 @@ cd apps/dashboard && pnpm run dev  # terminal 2
 
 ### Documentation
 
+- [Product roadmap](ROADMAP.md) — phases, current focus, timeline
 - [Architecture & integration patterns](docs/architecture.md)
+- [API contracts & integration boundaries](docs/api-contracts/README.md)
 - [Product requirements (PRD)](CSC_Dashboard_PRD.txt)
 
 ---

@@ -1,0 +1,210 @@
+openapi: 3.0.3
+info:
+  title: CSC Dashboard API
+  description: |
+    Integration API layer for the Content Supply Chain Dashboard.
+    Aggregates and orchestrates data from Workfront, Brand Central, and StudioOne.
+    See docs/api-contracts/README.md and docs/api-contracts/integration-boundaries.md for external system boundaries.
+  version: 0.1.0
+  contact:
+    name: CSC Programme
+
+servers:
+  - url: http://localhost:3001
+    description: Local development
+  - url: /api
+    description: Relative (e.g. behind reverse proxy)
+
+tags:
+  - name: Health
+    description: Service health and version
+  - name: Programmes
+    description: F1 Programme Command Centre — projects, milestones, RAG status
+  - name: Assets
+    description: F3 Asset Hub — browse, filter, availability (sourced from Brand Central)
+  - name: Briefs
+    description: F4 Transcreation brief and workflow
+  - name: Playbooks
+    description: F2 Digitised playbook builder
+
+paths:
+  /health:
+    get:
+      tags: [Health]
+      summary: Health check
+      operationId: getHealth
+      responses:
+        '200':
+          description: Service healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+
+  /api/programmes:
+    get:
+      tags: [Programmes]
+      summary: List programmes
+      description: Programmes from Workfront (and/or CSC Plan CSV). Placeholder returns empty list until Workfront sync is implemented.
+      operationId: listProgrammes
+      responses:
+        '200':
+          description: List of programmes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProgrammeListResponse'
+
+  /api/assets:
+    get:
+      tags: [Assets]
+      summary: List assets
+      description: Assets from Brand Central. Placeholder until BC integration. Filter by market, channel, format, language, approval status.
+      operationId: listAssets
+      parameters:
+        - name: market
+          in: query
+          schema: { type: string }
+          description: Filter by market
+        - name: programmeId
+          in: query
+          schema: { type: string }
+          description: Filter by programme
+        - name: approvalStatus
+          in: query
+          schema: { type: string }
+          description: Filter by approval status
+      responses:
+        '200':
+          description: List of assets
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetListResponse'
+
+  /api/briefs:
+    get:
+      tags: [Briefs]
+      summary: List briefs
+      description: Transcreation briefs (F4). Placeholder until Workfront + BC integration.
+      operationId: listBriefs
+      responses:
+        '200':
+          description: List of briefs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BriefListResponse'
+
+  /api/playbooks:
+    get:
+      tags: [Playbooks]
+      summary: List playbook versions
+      description: Playbook versions (F2). Placeholder until Brand Central publish flow.
+      operationId: listPlaybooks
+      parameters:
+        - name: programmeId
+          in: query
+          schema: { type: string }
+          description: Filter by programme
+      responses:
+        '200':
+          description: List of playbook versions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaybookListResponse'
+
+components:
+  schemas:
+    HealthResponse:
+      type: object
+      required: [status, service, timestamp]
+      properties:
+        status: { type: string, example: ok }
+        service: { type: string, example: csc-api }
+        version: { type: string, example: '0.1.0' }
+        timestamp: { type: string, format: date-time }
+
+    Programme:
+      type: object
+      description: PRD §7 Programme
+      properties:
+        id: { type: string }
+        name: { type: string }
+        startDate: { type: string, format: date }
+        endDate: { type: string, format: date }
+        phase: { type: string }
+        ragStatus: { type: string, enum: [red, amber, green] }
+        owner: { type: string }
+        toolboxType: { type: string }
+
+    Milestone:
+      type: object
+      description: PRD §7 Milestone
+      properties:
+        id: { type: string }
+        programmeId: { type: string }
+        name: { type: string }
+        dueDate: { type: string, format: date }
+        predecessors: { type: array, items: { type: string } }
+        completedDate: { type: string, format: date, nullable: true }
+        atRisk: { type: boolean }
+
+    ProgrammeListResponse:
+      type: object
+      properties:
+        programmes: { type: array, items: { $ref: '#/components/schemas/Programme' } }
+
+    Asset:
+      type: object
+      description: PRD §7 Asset (metadata; files in Brand Central)
+      properties:
+        id: { type: string }
+        programmeId: { type: string }
+        name: { type: string }
+        type: { type: string }
+        format: { type: string }
+        market: { type: string }
+        language: { type: string }
+        approvalStatus: { type: string }
+        version: { type: integer }
+
+    AssetListResponse:
+      type: object
+      properties:
+        assets: { type: array, items: { $ref: '#/components/schemas/Asset' } }
+
+    Brief:
+      type: object
+      description: PRD §7 Brief
+      properties:
+        id: { type: string }
+        marketUserId: { type: string }
+        assets: { type: array, items: { type: string } }
+        market: { type: string }
+        language: { type: string }
+        cdtOwnerId: { type: string, nullable: true }
+        status: { type: string }
+        submittedAt: { type: string, format: date-time }
+
+    BriefListResponse:
+      type: object
+      properties:
+        briefs: { type: array, items: { $ref: '#/components/schemas/Brief' } }
+
+    PlaybookVersion:
+      type: object
+      description: PRD §7 PlaybookVersion
+      properties:
+        id: { type: string }
+        programmeId: { type: string }
+        version: { type: integer }
+        publishedAt: { type: string, format: date-time }
+        sections: { type: array }
+        assetRefs: { type: array, items: { type: string } }
+
+    PlaybookListResponse:
+      type: object
+      properties:
+        playbooks: { type: array, items: { $ref: '#/components/schemas/PlaybookVersion' } }
