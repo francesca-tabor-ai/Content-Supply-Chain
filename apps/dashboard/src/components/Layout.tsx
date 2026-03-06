@@ -1,15 +1,33 @@
-import { Link, Outlet } from 'react-router-dom'
+import { Link, NavLink, Outlet } from 'react-router-dom'
+
+const navItems = [
+  { to: '/', label: 'Command Centre' },
+  { to: '/assets', label: 'Asset Hub' },
+  { to: '/playbook', label: 'Playbook' },
+  { to: '/briefs', label: 'Briefs' },
+]
 
 export function Layout() {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <nav style={{ padding: '1rem', borderBottom: '1px solid #eee', display: 'flex', gap: '1rem' }}>
-        <Link to="/">Command Centre</Link>
-        <Link to="/assets">Asset Hub</Link>
-        <Link to="/playbook">Playbook</Link>
-        <Link to="/briefs">Briefs</Link>
-      </nav>
-      <main style={{ padding: '1rem', flex: 1 }}>
+    <div className="layout">
+      <aside className="sidebar">
+        <Link to="/" className="sidebar-brand">
+          CSC Dashboard
+        </Link>
+        <nav className="sidebar-nav">
+          {navItems.map(({ to, label }) => (
+            <NavLink
+              key={to}
+              to={to}
+              end={to === '/'}
+              className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}
+            >
+              {label}
+            </NavLink>
+          ))}
+        </nav>
+      </aside>
+      <main className="main">
         <Outlet />
       </main>
     </div>
